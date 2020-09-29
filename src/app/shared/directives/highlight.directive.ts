@@ -8,28 +8,28 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 })
 export class HighlightDirective {
 
-  constructor (private el: ElementRef) {
+  constructor(private el: ElementRef) {
   }
 
   @Input() defaultColor: string;
 
   @Input('appHighlight') highlightColor: string;
 
-  @HostListener('mouseenter') onMouseEnter () {
+  @HostListener('mouseenter') onMouseEnter() {
     console.log(this.highlightColor);
     this.highlight(this.highlightColor || this.defaultColor || 'red');
   }
 
-  @HostListener('mouseleave') onMouseLeave () {
+  @HostListener('mouseleave') onMouseLeave() {
     this.highlight(null);
   }
 
-  @HostListener('click', ['$event.target']) onClick () {
+  @HostListener('click', ['$event.target']) onClick() {
     console.log(this);
     this.highlight('skyblue');
   }
 
-  private highlight (color: string) {
+  private highlight(color: string) {
     this.el.nativeElement.style.backgroundColor = color;
   }
 }

@@ -4,7 +4,7 @@
 export default {
   // 获取验证码
   getCode: {
-    url: '/salesCampusClub/user/captcha',
+    url: '/test/user/captcha',
     method: 'get'
   },
 

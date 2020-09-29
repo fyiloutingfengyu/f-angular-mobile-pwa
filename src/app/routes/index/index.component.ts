@@ -19,15 +19,15 @@ export class IndexComponent implements OnInit {
     name: 'test'
   };
 
-  constructor (private indexService: IndexService, private toast: ToastService, private $http: RequestService) {
+  constructor(private indexService: IndexService, private toast: ToastService, private $http: RequestService) {
   }
 
-  ngOnInit (): void {
+  ngOnInit(): void {
 
   }
 
-  currentDateFormat (date, format: string = 'yyyy-mm-dd HH:MM'): any {
-    const pad = (n: number): string => (n < 10 ? `0${ n }` : n.toString());
+  currentDateFormat(date, format: string = 'yyyy-mm-dd HH:MM'): any {
+    const pad = (n: number): string => (n < 10 ? `0${n}` : n.toString());
     return format
       .replace('yyyy', date.getFullYear())
       .replace('mm', pad(date.getMonth() + 1))
@@ -37,12 +37,12 @@ export class IndexComponent implements OnInit {
       .replace('ss', pad(date.getSeconds()));
   }
 
-  onOk (result: Date): void {
+  onOk(result: Date): void {
     this.name = this.currentDateFormat(result);
     this.value = result;
   }
 
-  testFun (): void {
+  testFun(): void {
     this.indexService.test(this.form).subscribe(res => {
       // console.log(res);
     });

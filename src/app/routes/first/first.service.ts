@@ -1,17 +1,17 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class FirstService {
 
-    constructor() {
-    }
+  constructor() {
+  }
 
-    getUserInfo() {
-        return {
-            name: 'Tom',
-            age: 15
-        }
+  getUserInfo() {
+    return {
+      name: 'Tom',
+      age: 15
     }
+  }
 }

@@ -122,7 +122,7 @@ const createQrCode = (url: string, w = 100, h = 100, containerDom: HTMLElement):
 /**
  * @description: 当前服务域名
  */
-const DOMAIN = `${ window.location.protocol }//${ window.location.host }`;
+const DOMAIN = `${window.location.protocol}//${window.location.host}`;
 
 /**
  * @description: 读取location.search中的参数值

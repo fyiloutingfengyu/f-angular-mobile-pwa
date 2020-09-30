@@ -7,12 +7,14 @@ import { LoginComponent } from './login/login.component';
 import { FirstComponent } from './first/first.component';
 import { SecondComponent } from './second/second.component';
 import { HighlightDirective } from '../shared/directives/highlight.directive';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
     RoutesRoutingModule,
     FormsModule,
-    NgZorroAntdMobileModule
+    NgZorroAntdMobileModule,
+    BrowserModule
   ],
   declarations: [
     FirstComponent,

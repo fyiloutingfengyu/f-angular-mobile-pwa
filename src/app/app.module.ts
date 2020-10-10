@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { CommonService } from './shared/services/common.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { environment } from '../environments/environment';
     RoutesModule,
     FormsModule,
     RouterModule,
+    SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [CommonService],

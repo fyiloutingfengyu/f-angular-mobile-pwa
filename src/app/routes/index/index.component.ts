@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { IndexService } from './index.service';
 import { RequestService } from '../../common/http/request.service';
 import { ToastService } from 'ng-zorro-antd-mobile';
@@ -11,40 +10,77 @@ import { ToastService } from 'ng-zorro-antd-mobile';
   providers: [IndexService, RequestService, ToastService]
 })
 export class IndexComponent implements OnInit {
-  envObj = environment;
-  color = 'yellow';
-  name = '选择';
-  value = new Date();
-  form = {
-    name: 'test'
+  flag = true;
+  index = 1;
+  isMobile = /Android|webOS|iPhone|iPod|BlackBerry/i.test(window.navigator.userAgent);
+  pageLimit = 20;
+  public directionCount = 0;
+  page = 0;
+  state = {
+    refreshState: {
+      currentState: 'deactivate',
+      drag: false
+    },
+    direction: '',
+    endReachedRefresh: false,
+    height: 500,
+    data: [],
+    directionName: 'both up and down'
   };
+  dtPullToRefreshStyle = {height: this.state.height + 'px'};
+
+
+  data = Array.from(new Array(8)).map((value, i) => ({
+    icon: '../../../assets/images/common/logo.png',
+    text: `name${i}`
+  }));
 
   constructor(private indexService: IndexService, private toast: ToastService, private $http: RequestService) {
   }
 
   ngOnInit(): void {
-
+    this.addItems(0);
   }
 
-  currentDateFormat(date, format: string = 'yyyy-mm-dd HH:MM'): any {
-    const pad = (n: number): string => (n < 10 ? `0${n}` : n.toString());
-    return format
-      .replace('yyyy', date.getFullYear())
-      .replace('mm', pad(date.getMonth() + 1))
-      .replace('dd', pad(date.getDate()))
-      .replace('HH', pad(date.getHours()))
-      .replace('MM', pad(date.getMinutes()))
-      .replace('ss', pad(date.getSeconds()));
+  onChange(item) {
+    console.log('onChange', item);
   }
 
-  onOk(result: Date): void {
-    this.name = this.currentDateFormat(result);
-    this.value = result;
+  onTabClick(item) {
+    console.log('onTabClick', item);
   }
 
-  testFun(): void {
-    this.indexService.test(this.form).subscribe(res => {
-      // console.log(res);
-    });
+  goToPage(event) {
+    console.log(event);
+  }
+
+  pullToRefresh(event) {
+    if (event === 'endReachedRefresh') {
+      if (this.page < 9) {
+        this.page++;
+        this.addItems(this.page * this.pageLimit);
+        this.state.refreshState.currentState = 'release';
+        setTimeout(() => {
+          this.state.refreshState.currentState = 'finish';
+        }, 1000);
+      }
+    } else {
+      if (event === 'down') {
+        this.state.data = [];
+        this.page = 0;
+        this.addItems(0);
+      } else {
+        if (this.page < 9) {
+          this.page++;
+          this.addItems(this.page * this.pageLimit);
+        }
+      }
+    }
+  }
+
+  addItems(startIndex) {
+    for (let i = startIndex; i < this.pageLimit * (this.page + 1); i++) {
+      this.state.data.push(i);
+    }
   }
 }

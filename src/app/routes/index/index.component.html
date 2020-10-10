@@ -1,25 +1,81 @@
-<nav>
-  <ul class="nav-bar">
-    <li class="nav-item"><a routerLink="/first-component">First Component</a></li>
-    <li class="nav-item"><a routerLink="/second-component">Second Component</a></li>
-  </ul>
-</nav>
-<div (click)="testFun()"> {{ envObj.production }}</div>
+<div class="home-page">
+  <div class="data-statistics-panel">
+    <div class="brand-box">
+      <img class="logo" src="../../../assets/images/common/logo.png" alt="">
+      <div class="brand-name-domain">
+        <p class="name">侠客岛</p>
+        <p class="domain">xiakedao.com</p>
+      </div>
+      <Icon [type]="'right'" [color]="'#fff'" [size]="'md'"></Icon>
+    </div>
+    <app-date-search></app-date-search>
+    <Tabs
+      class="tabs-box"
+      [page]="3"
+      [useOnPan]="true"
+      [swipeable]="true"
+      [activeTab]="index"
+      [tabBarActiveTextColor]="'#1890ff'"
+      (onChange)="onChange($event)"
+      (onTabClick)="onTabClick($event)"
+    >
+      <TabPane [title]="titleTemplate">
+        <ng-template #titleTemplate>
+          <Badge [text]="99">
+            <div>First Tab</div>
+          </Badge>
+        </ng-template>
+        <div>
+          Content of first tab
+        </div>
+      </TabPane>
+      <TabPane [title]="titleTemplate1">
+        <ng-template #titleTemplate1>
+          <Badge [text]="'今日(30)'">
+            <div>Second Tab</div>
+          </Badge>
+        </ng-template>
+        <div>
+          Content of second tab
+        </div>
+      </TabPane>
+      <TabPane [title]="titleTemplate2">
+        <ng-template #titleTemplate2>
+          <Badge [dot]="true">
+            <div>Third Tab</div>
+          </Badge>
+        </ng-template>
+        <div>
+          Content of third tab
+        </div>
+      </TabPane>
+    </Tabs>
+  </div>
 
-<!-- 属性指令 -->
-<p [appHighlight]="color">Highlight me!</p>
+  <h2 class="item-title">工具栏</h2>
+  <Grid [activeStyle]="false" [data]="data" (onClick)="goToPage($event)"></Grid>
 
-<!-- ng-zorro-antd-mobile -->
-<List [className]="'date-picker-list'">
-  <ListItem
-    DatePicker
-    [extra]="currentDateFormat(value)"
-    [arrow]="'horizontal'"
-    [mode]="'datetime'"
-    [(ngModel)]="value"
-    (onOk)="onOk($event)"
+  <h2 class="item-title">数据列表</h2>
+  <PullToRefresh
+    [ngStyle]="dtPullToRefreshStyle"
+    [direction]="state.direction"
+    [(ngModel)]="state.refreshState"
+    [endReachedRefresh]="state.endReachedRefresh"
+    (onRefresh)="pullToRefresh($event)"
   >
-    Datetime
-    <Brief>{{ name }}</Brief>
-  </ListItem>
-</List>
+    <ul class="data-list-header">
+      <li>序号</li>
+      <li>姓名</li>
+      <li>年龄</li>
+    </ul>
+    <ul *ngFor="let i of this.state.data" class="data-list-item">
+      <li>{{i}}</li>
+      <li>test{{i}}</li>
+      <li>18</li>
+    </ul>
+  </PullToRefresh>
+
+  <ng-template #loading>
+    <Icon type="loading"></Icon>
+  </ng-template>
+</div>

@@ -8,6 +8,7 @@ import { FirstComponent } from './first/first.component';
 import { SecondComponent } from './second/second.component';
 import { HighlightDirective } from '../shared/directives/highlight.directive';
 import { BrowserModule } from '@angular/platform-browser';
+import { DateSearchComponent } from '../shared/components/date-search/date-search.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { BrowserModule } from '@angular/platform-browser';
     SecondComponent,
     IndexComponent,
     LoginComponent,
-    HighlightDirective
+    HighlightDirective,
+    DateSearchComponent
   ],
   entryComponents: []
 })

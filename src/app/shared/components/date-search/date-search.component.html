@@ -1,0 +1,22 @@
+<ListItem [arrow]="'horizontal'"
+          class="date-search-bar"
+          (onClick)="onClick_1()"
+>
+  {{this.state.selectedDate || '选择日期区间'}}
+</ListItem>
+
+<Calendar
+  [(ngModel)]="this.state.date"
+  [visible]="this.state.show"
+  [defaultDate]="this.state.now"
+  [minDate]="this.state.minDate"
+  [maxDate]="this.state.maxDate"
+  [pickTime]="this.state.pickTime"
+  [rowSize]="this.state.rowSize"
+  [showShortcut]="this.state.showShortcut"
+  [defaultValue]="this.state.defaultValue"
+  (onCancel)="triggerCancel()"
+  (onConfirm)="triggerConfirm($event)"
+>
+</Calendar>
+

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IndexService } from './index.service';
 import { RequestService } from '../../common/http/request.service';
 import { ToastService } from 'ng-zorro-antd-mobile';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -10,11 +11,14 @@ import { ToastService } from 'ng-zorro-antd-mobile';
   providers: [IndexService, RequestService, ToastService]
 })
 export class IndexComponent implements OnInit {
+  form: {
+    name: 'test',
+    age: 18
+  };
   flag = true;
   index = 1;
   isMobile = /Android|webOS|iPhone|iPod|BlackBerry/i.test(window.navigator.userAgent);
   pageLimit = 20;
-  public directionCount = 0;
   page = 0;
   state = {
     refreshState: {
@@ -29,13 +33,14 @@ export class IndexComponent implements OnInit {
   };
   dtPullToRefreshStyle = {height: this.state.height + 'px'};
 
-
   data = Array.from(new Array(8)).map((value, i) => ({
     icon: '../../../assets/images/common/logo.png',
-    text: `name${i}`
+    text: `name${i}`,
+    url: '/first-component'
   }));
 
-  constructor(private indexService: IndexService, private toast: ToastService, private $http: RequestService) {
+  constructor(private indexService: IndexService, private toast: ToastService,
+              private $http: RequestService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -52,6 +57,7 @@ export class IndexComponent implements OnInit {
 
   goToPage(event) {
     console.log(event);
+    this.router.navigate([event.data.url]);
   }
 
   pullToRefresh(event) {
@@ -79,8 +85,24 @@ export class IndexComponent implements OnInit {
   }
 
   addItems(startIndex) {
+    this.loadingToast();
+
     for (let i = startIndex; i < this.pageLimit * (this.page + 1); i++) {
       this.state.data.push(i);
     }
+
+    setTimeout(() => {
+      this.toast.hide();
+    }, 2000);
+  }
+
+  testFun(): void {
+    this.indexService.test(this.form).subscribe(res => {
+      // console.log(res);
+    });
+  }
+
+  loadingToast() {
+    setTimeout(() => this.toast.loading('加载中...', 0), 0);
   }
 }

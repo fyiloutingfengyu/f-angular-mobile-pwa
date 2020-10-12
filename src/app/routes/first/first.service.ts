@@ -12,6 +12,6 @@ export class FirstService {
     return {
       name: 'Tom',
       age: 15
-    }
+    };
   }
 }

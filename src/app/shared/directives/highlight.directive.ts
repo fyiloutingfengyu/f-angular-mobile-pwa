@@ -25,8 +25,7 @@ export class HighlightDirective {
   }
 
   @HostListener('click', ['$event.target']) onClick() {
-    console.log(this);
-    this.highlight('skyblue');
+    this.highlight(this.highlightColor || this.defaultColor || 'skyblue');
   }
 
   private highlight(color: string) {

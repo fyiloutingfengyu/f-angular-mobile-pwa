@@ -1,14 +1,28 @@
 <div class="first-page">
-  <h1>first works!</h1>
+  <h1>first</h1>
+  <br>
   <button (click)="gotoHome()" type="button">去首页</button>
   <br>
+  <br>
+  <!-- 属性指令 -->
+  <p [appHighlight]="color">Highlight me!</p>
+  <br>
   <button (click)="getData()" type="button">获取数据</button>
+  <br>
   <div>
     {{userInfo?.name}}
   </div>
   <br>
-  <br>
   <button (click)="changeData()" type="button">更改数据</button>
   {{userInfo.age}}
 </div>
+
+<ImagePicker
+  [files]="files"
+  [multiple]="multipleTab === 1"
+  [selectable]="files.length < 5"
+  (onChange)="fileChange($event)"
+  (onImageClick)="imageClick($event)"
+>
+</ImagePicker>
 

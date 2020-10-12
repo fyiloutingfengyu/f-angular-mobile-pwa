@@ -1,12 +1,12 @@
 <div class="home-page">
   <div class="data-statistics-panel">
-    <div class="brand-box">
+    <div class="brand-box" (click)="testFun()">
       <img class="logo" src="../../../assets/images/common/logo.png" alt="">
       <div class="brand-name-domain">
         <p class="name">侠客岛</p>
         <p class="domain">xiakedao.com</p>
       </div>
-      <Icon [type]="'right'" [color]="'#fff'" [size]="'md'"></Icon>
+      <!--<Icon [type]="'right'" [color]="'#fff'" [size]="'md'"></Icon>-->
     </div>
     <app-date-search></app-date-search>
     <Tabs
@@ -67,15 +67,13 @@
       <li>序号</li>
       <li>姓名</li>
       <li>年龄</li>
+      <li>是否手机端</li>
     </ul>
     <ul *ngFor="let i of this.state.data" class="data-list-item">
       <li>{{i}}</li>
       <li>test{{i}}</li>
       <li>18</li>
+      <li>{{isMobile}}</li>
     </ul>
   </PullToRefresh>
-
-  <ng-template #loading>
-    <Icon type="loading"></Icon>
-  </ng-template>
 </div>
